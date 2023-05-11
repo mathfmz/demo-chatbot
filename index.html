@@ -832,77 +832,25 @@
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
-  <style type='text/css'>
-    .embeddedServiceHelpButton .helpButton .uiButton {
-      background-color: #005290;
-      font-family: "Arial", sans-serif;
-    }
-    .embeddedServiceHelpButton .helpButton .uiButton:focus {
-      outline: 1px solid #005290;
-    }
-  </style>
-  <style type='text/css'>
-    .embeddedServiceHelpButton .helpButton .uiButton {
-      background-color: #005290;
-      font-family: "Arial", sans-serif;
-    }
-    .embeddedServiceHelpButton .helpButton .uiButton:focus {
-      outline: 1px solid #005290;
-    }
-  </style>
-  
-  <script type='text/javascript' src='https://service.force.com/embeddedservice/5.0/esw.min.js'></script>
   <script type='text/javascript'>
-    var initESW = function(gslbBaseURL) {
-      embedded_svc.settings.displayHelpButton = true; //Or false
-      embedded_svc.settings.language = 'pt-BR'; //For example, enter 'en' or 'en-US'
+    function initEmbeddedMessaging() {
+      try {
+        embeddedservice_bootstrap.settings.language = 'pt-BR'; // For example, enter 'en' or 'en-US'
   
-      embedded_svc.settings.defaultMinimizedText = 'Converse conosco'; //(Defaults to Chat with an Expert)
-      embedded_svc.settings.disabledMinimizedText = 'Nenhum agente on-line'; //(Defaults to Agent Offline)
-  
-      embedded_svc.settings.loadingText = 'Carregando'; //(Defaults to Loading)
-      //embedded_svc.settings.storageDomain = 'yourdomain.com'; //(Sets the domain for your deployment so that visitors can navigate subdomains during a chat session)
-  
-      // Settings for Chat
-      //embedded_svc.settings.directToButtonRouting = function(prechatFormData) {
-        // Dynamically changes the button ID based on what the visitor enters in the pre-chat form.
-        // Returns a valid button ID.
-      //};
-      //embedded_svc.settings.prepopulatedPrechatFields = {}; //Sets the auto-population of pre-chat form fields
-      //embedded_svc.settings.fallbackRouting = []; //An array of button IDs, user IDs, or userId_buttonId
-      //embedded_svc.settings.offlineSupportMinimizedText = '...'; //(Defaults to Contact Us)
-  
-      embedded_svc.settings.enabledFeatures = ['LiveAgent'];
-      embedded_svc.settings.entryFeature = 'LiveAgent';
-  
-      embedded_svc.init(
-        'https://so1682790335302.my.salesforce.com',
-        'https://so1682790335302.my.salesforce-sites.com/public',
-        gslbBaseURL,
-        '00DDp00000174Yy',
-        'DemoChat',
-        {
-          baseLiveAgentContentURL: 'https://c.la1-c2-ia7.salesforceliveagent.com/content',
-          deploymentId: '572Dp000000gV9N',
-          buttonId: '573Dp000000khQp',
-          baseLiveAgentURL: 'https://d.la1-c2-ia7.salesforceliveagent.com/chat',
-          eswLiveAgentDevName: 'EmbeddedServiceLiveAgent_Parent04IDp000000g5XFMAY_187e4f88150',
-          isOfflineSupportEnabled: false
-        }
-      );
+        embeddedservice_bootstrap.init(
+          '00DDp00000174Yy',
+          'Demo',
+          'https://so1682790335302.my.site.com/ESWDemo1683836839794',
+          {
+            scrt2URL: 'https://so1682790335302.my.salesforce-scrt.com'
+          }
+        );
+      } catch (err) {
+        console.error('Error loading Embedded Messaging: ', err);
+      }
     };
-  
-    if (!window.embedded_svc) {
-      var s = document.createElement('script');
-      s.setAttribute('src', 'https://so1682790335302.my.salesforce.com/embeddedservice/5.0/esw.min.js');
-      s.onload = function() {
-        initESW(null);
-      };
-      document.body.appendChild(s);
-    } else {
-      initESW('https://service.force.com');
-    }
   </script>
+  <script type='text/javascript' src='https://so1682790335302.my.site.com/ESWDemo1683836839794/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>  
 </body>
 
 </html>
